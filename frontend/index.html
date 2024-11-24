@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend</title>
+</head>
+<body>
+    <h1>Flask Backend Data Viewer</h1>
+    <button id="fetchData">Fetch Data</button>
+    <div id="output"></div>
+
+    <script>
+        document.getElementById('fetchData').addEventListener('click', () => {
+            fetch('http://127.0.0.1:5000/data') // Replace with backend service URL
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('output').innerHTML = JSON.stringify(data, null, 2);
+                })
+                .catch(error => {
+                    document.getElementById('output').innerHTML = "Error: " + error;
+                });
+        });
+    </script>
+</body>
+</html>
