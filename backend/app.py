@@ -1,8 +1,10 @@
 from flask import Flask, jsonify
 import psycopg2
 from psycopg2.extras import RealDictCursor
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS = CORS(app)
 
 # Database connection details
 DB_HOST = 'database-1.cp25uacsjlql.us-east-1.rds.amazonaws.com'  # Replace with your RDS endpoint

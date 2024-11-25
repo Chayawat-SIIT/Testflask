@@ -12,12 +12,18 @@
 
     <script>
         document.getElementById('fetchData').addEventListener('click', () => {
-            fetch('http://backend:5000/data') // Replace with backend service URL
-                .then(response => response.json())
+            fetch('http://18.234.111.71:5000/data') // Replace with backend service URL
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     document.getElementById('output').innerHTML = JSON.stringify(data, null, 2);
                 })
                 .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
                     document.getElementById('output').innerHTML = "Error: " + error;
                 });
         });
