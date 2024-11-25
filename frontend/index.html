@@ -12,7 +12,7 @@
 
     <script>
         document.getElementById('fetchData').addEventListener('click', () => {
-            fetch('http://127.0.0.1:5000/data') // Replace with backend service URL
+            fetch('http://backend:5000/data') // Replace with backend service URL
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('output').innerHTML = JSON.stringify(data, null, 2);

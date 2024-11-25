@@ -9,7 +9,7 @@ DB_HOST = 'database-1.cp25uacsjlql.us-east-1.rds.amazonaws.com'  # Replace with 
 DB_PORT = '5432'              # PostgreSQL default port
 DB_USER = 'postgres'     # Replace with your username
 DB_PASSWORD = 'g10-database' # Replace with your password
-DB_NAME = 'database-1'     # Replace with your database name
+DB_NAME = 'postgres'     # Replace with your database name
 
 @app.route('/data', methods=['GET'])
 def get_data():
