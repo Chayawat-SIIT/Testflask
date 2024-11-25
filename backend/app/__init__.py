@@ -1,7 +1,8 @@
+import os
 from flask import Flask
+from app.extensions import init_extensions
 from app.account.routes import account_blueprint
 from app.data.routes import data_blueprint
-from app.extensions import cors
 from app.utils.config import load_env_variables
 
 def create_app():
@@ -10,10 +11,10 @@ def create_app():
 
     # Create Flask app
     app = Flask(__name__)
-    app.secret_key = 'your-secure-key'  # Replace with a secure value or use .env
+    app.secret_key = os.environ.get('SECRET_KEY')
 
     # Initialize extensions
-    cors.init_app(app)
+    init_extensions(app)
 
     # Register blueprints
     app.register_blueprint(account_blueprint, url_prefix='/account')
