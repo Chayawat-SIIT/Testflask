@@ -4,10 +4,10 @@ import os
 
 def get_db_connection():
     return psycopg2.connect(
-        host=os.getenv('DB_HOST'),
-        port=os.getenv('DB_PORT'),
-        user=os.getenv('DB_USER'),
-        password=os.getenv('DB_PASSWORD'),
-        dbname=os.getenv('DB_NAME'),
+        host=os.environ.get('DB_HOST'),
+        port=os.environ.get('DB_PORT'),
+        user=os.environ.get('DB_USER'),
+        password=os.environ.get('DB_PASSWORD'),
+        dbname=os.environ.get('DB_NAME'),
         cursor_factory=RealDictCursor
     )
