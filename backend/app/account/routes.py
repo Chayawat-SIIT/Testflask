@@ -1,4 +1,5 @@
 from flask import Blueprint, session, redirect, url_for
+import requests
 from app.extensions import oauth
 
 account_blueprint = Blueprint('account', __name__)
