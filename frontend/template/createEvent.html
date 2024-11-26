@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Event | Concert Ticketing System</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/logo.png">
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body style="overflow: hidden;">
+    <header>
+        <nav>
+            <a href="home.html">
+                <img src="../static/img/logo.png" alt=" ">
+            </a>
+            <a href="concert.html">Concerts</a>
+            <a href="signup.html">Sign Up</a>
+            <a href="login.html">Log In</a>
+            <a href="about.html">About Us</a>
+            <a href="account.html">My Account</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="concert-card" style="height: 540px; width: 800px; margin-top: 140px;">            
+            <section class="user-details">
+                <h2>Event Details</h2>
+                <form id="accountForm" method="post">
+                    <div class="form-group">
+                        <label for="eventname">Event Name</label>
+                        <input type="text" id="eventname" name="eventname">
+                    </div>
+                    <div class="form-group">
+                        <label for="eventdate">Date</label>
+                        <input type="date" id="eventdate" name="eventdate">
+                    </div>
+                    <div class="form-group">
+                        <label for="eventdesc   ">Event Description</label>
+                        <input type="text" id="eventdesc" name="eventdesc">
+                    </div>
+                    <div class="form-group">
+                        <label for="eventimage">Upload Advertisement Image</label>
+                        <input type="file" id="eventimage" name="eventimage">
+                    </div>
+                </form>
+                <button>Create Event</button>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

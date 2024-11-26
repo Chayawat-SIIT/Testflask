@@ -1,0 +1,429 @@
+* {
+  box-sizing: border-box; /* General Reset */
+}
+
+
+html::-webkit-scrollbar {
+  display: none;    /* completely hides the scollbar */
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  background-color: #f8f9fa;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  
+  background: url('../static/img/concert.png') no-repeat center center/cover;
+  background-attachment: fixed;
+  scrollbar-width: 0;
+}
+
+header {
+  background-color: #222;
+  color: white;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1em;
+}
+
+header img {
+  border-radius: 50%;
+  height: 50px;
+  margin-bottom: -5px;
+}
+
+header a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0 1rem;
+  transition: color 0.3s ease-in-out;
+}
+
+header a:hover {
+  color: #00bcd4;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+  padding-top: 3rem;
+}
+
+/* Main Content with Background Image */
+main {
+  position: relative;
+  height: 100vh;
+  margin-top: 100px;
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+}
+
+.main-content {
+  text-align: center;
+  margin-top: 14%;
+  background-color: rgba(0, 0, 0, 0.8); /* Dark overlay for text visibility */
+  color: white;
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.main-content h1 {
+  color: white;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.main-content p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.main-content button {
+  background-color: #ff38a2;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 0.75em 1.5em;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.main-content button:hover {
+  background-color: #ae005d;
+}
+
+/* Button Styling */
+main button {
+  background-color: #ff38a2;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 0.75em 1.5em;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+main button:hover {
+  background-color: #ae005d;
+}
+
+#concert-list {
+  max-width: 1200px;
+  margin: 4% auto;
+  padding: 1rem;
+}
+
+.concert-card {
+  display: flex;
+  max-width: 1200px;
+  align-items: center;
+  justify-content: start;
+  padding: 20px;
+  margin: 2% auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color:  rgba(0, 0, 0, 0.8);;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.concert-card img {
+  width: 20%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.concert-info {
+  line-height: 2rem;
+  margin-left: 60px;
+}
+
+.concert-info button {
+  background-color: #ff38a2;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 0.5em 1.2em;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.concert-info button:hover {
+  background-color: #ae005d;
+}
+
+/* MEMBER */
+.member-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Creates 3 equal-width columns */
+  grid-template-rows: repeat(2, auto); /* Creates 2 rows with auto height */
+  justify-items: center; /* Centers items horizontally */
+  align-items: center; /* Centers items vertically */
+  margin-top: 20px;
+}
+
+.member {
+  width: 400px;
+  border-radius: 8px;
+  background-color:  rgba(174, 0, 93, 0.7);;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 25px 20px;
+  padding: 15px;
+  text-align: center;
+}
+
+/* LOGIN & SIGNUP */
+.login-container, .signup-container {
+  width: 400px;
+  margin: 2% auto; /* Center horizontally with auto margin */
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #222;
+  color: white;
+  text-align: left;
+  box-shadow: 0px 10px 50px 0px rgba(0, 0, 0, 0.5); /* Add box shadow for depth */
+}
+
+.login-container form, .signup-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container h6, .signup-container h6 {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 4px 0 10px 0;
+}
+
+.login-container p, .signup-container p {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+#username, #email, #phone, #password, #eventname, #eventdate, #eventdesc, #eventimage {
+  height: 40px;
+  padding: 10px;
+  margin-bottom: 5px;
+  border: none;
+  border-radius: 6px;
+  background-color: #333;
+  color: #fff;
+  width: 100%;
+}
+
+#goSignUp {
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.pwd-error {
+  margin-top: -60px;
+  text-align: center;
+  font-size: 24px;
+}
+
+input[type="submit"] {
+  background-color: green;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 8px 0;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+  
+input[type="submit"]:hover {
+  background-color: darkgreen;
+}
+.signup-container {
+  height: 470px;
+}
+
+.signup-container #password {
+  border-radius: 6px 0 0 6px;
+}
+
+.signup-container select {
+  padding: 10px;
+  border: 1px solid #444;
+  border-radius: 6px;
+  background-color: #333;
+  color: #fff;
+  width: 100%;
+}
+
+#passwordVis {
+  background-color: #333;
+  width: 10%;
+  height: 40px;
+  border: none;
+  border-radius: 0 6px 6px 0;
+
+}
+
+#passwordVis:hover {
+  background-color: #ae005d;
+}
+
+#goLogIn {
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* TICKET */
+.map {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: auto auto auto auto;
+  gap: 10px;
+  width: 50%;
+  max-width: 600px;
+}
+.zone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid black;
+  border-radius: 10px;
+  font-weight: bold;
+  height: 80px;
+  background-color: white;
+}
+#stage {
+  grid-column: 1 / span 3;
+  height: 60px;
+  color: black;
+}
+#zoneC, #zoneD {
+  grid-row: 2 / span 3;
+  height: 100%;
+}
+#zoneA {
+  grid-column: 2;
+  grid-row: 2;
+}
+#zoneB {
+  grid-column: 2;
+  grid-row: 3;
+}
+.dropdown {
+  margin-bottom: 10px;
+  font-size: 1.2em;
+}
+.dropdown * {
+  margin-left: 10px;
+}
+select {
+  padding: 10px 15px;
+  font-size: 16px;
+  margin-right: 20px;
+  border-radius: 10px;
+}
+.summary {
+  margin: 30px 0 0 80px;
+}
+.purchase-btn {
+  margin: 20px 0 0 80px;
+  padding: 10px 20px;
+  background-color: green;
+  color: white;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+.purchase-btn:disabled {
+  background-color: grey;
+  cursor: not-allowed;
+}
+.purchase-btn:disabled:hover {
+  background-color: grey;
+  cursor: not-allowed;
+}
+
+/* ACCOUNT */
+.user-details, .user-tickets {
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  margin-bottom: 10px;
+}
+
+.user-details h2, .user-tickets h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.user-details .form-group {
+  margin-bottom: 1rem;
+}
+
+.user-details label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.user-details input, .user-details select {
+  width: 100%;
+  padding: 0.8em;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.user-details input[readonly], .user-details select[disabled] {
+  background-color: #f0f0f0;
+}
+
+.user-tickets {
+  height : 470px;
+  margin-top: -2rem;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}

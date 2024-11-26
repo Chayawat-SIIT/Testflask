@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In | Concert Ticketing System</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/logo.png">
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body style="overflow: hidden;">
+    <header>
+        <nav>
+            <a href="home.html">
+                <img src="../static/img/logo.png" alt=" ">
+            </a>
+            <a href="concert.html">Concerts</a>
+            <a href="signup.html">Sign Up</a>
+            <a href="login.html">Log In</a>
+            <a href="about.html">About Us</a>
+            <a href="account.html">My Account</a>
+        </nav>
+    </header>  
+
+    <main>
+        <h1>Log In</h1>
+        <div class="login-container" style="width: 500px;">
+            <form id="loginForm" action="" method="post" onsubmit="redirectToAccount()">
+                <div>
+                    <label for="username" style="text-align: center;"><h6>Please provide the OTP sent to your phone number</h6></label>
+                    <input type="text" id="username" name="username">
+                </div>
+                <input type="submit" name="LogIn" value="Log In">
+                <p style="text-align: center"> Didn't receive the OTP?</p>
+                <a id="goSignUp" href="">resend</a>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        function redirectToAccount() {
+            event.preventDefault();
+            window.location.href = "account.html"; // redirect to account.html
+        }
+    </script>
+</body>
+</html>

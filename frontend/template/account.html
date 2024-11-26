@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account | Concert Ticketing System</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/logo.png">
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body style="overflow: hidden;">
+    <header>
+        <nav>
+            <a href="home.html">
+                <img src="../static/img/logo.png" alt=" ">
+            </a>
+            <a href="concert.html">Concerts</a>
+            <a href="signup.html">Sign Up</a>
+            <a href="login.html">Log In</a>
+            <a href="about.html">About Us</a>
+            <a href="account.html">My Account</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>My Account</h1>
+        <div class="concert-card" style="height: 470px;">
+            <section class="user-details">
+                <h2>User Details</h2>
+                <form id="accountForm" method="post">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" value="Punnachai" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" value="punnachai@mail.com" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" value="0812345678" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="userType">User Type</label>
+                        <select id="userType" name="userType" disabled>
+                            <option value="normal">Normal</option>
+                            <option value="VIP" selected>VIP</option>
+                        </select>
+                    </div>
+                </form>
+            </section>
+
+            <section class="user-tickets">
+                <h2>Your Tickets</h2>
+                <div class="concert-card" style="height: 240px;">
+                    <img src="../static/img/concert03.jpg" alt="">
+                    <div class="concert-info">
+                        <h3>Rock Fest 2024</h3>
+                        <p>Electrifying performances by top rock bands, with a mix of classic anthems and fresh new sounds</p>
+                        <button>View Ticket</button>
+                    </div>
+                </div>
+                <div class="concert-card" style="height: 240px;">
+                    <img src="../static/img/concert01.jpg" alt="">
+                    <div class="concert-info">                    
+                        <h3>Indie Vibes 2025</h3>
+                        <p>Enjoy an eclectic mix of indie rock, folk, and electronic tunes from up-and-coming artists.</p>
+                        <button>View Ticket</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

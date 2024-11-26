@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment | Concert Ticketing System</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/logo.png">
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body style="overflow: hidden;">
+    <header>
+        <nav>
+            <a href="home.html">
+                <img src="../static/img/logo.png" alt=" ">
+            </a>
+            <a href="concert.html">Concerts</a>
+            <a href="signup.html">Sign Up</a>
+            <a href="login.html">Log In</a>
+            <a href="about.html">About Us</a>
+            <a href="account.html">My Account</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Payment</h1>
+        <div class="concert-card" style="width: 500px; text-align: center;">
+            <form action="" method="post" style="padding-left: 50px;" onsubmit="redirectToAccount()">
+                <label for="payment-method">Choose a payment method:</label>
+                <select id="payment-method" name="payment-method">
+                    <option value="credit-card">Credit Card</option>
+                    <option value="bank-transfer">Bank Transfer</option>
+                    <option value="paypal">PayPal</option>
+                </select>
+                <br><br>
+                <button type="submit" class="confirm-payment-btn">Confirm Payment</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        function redirectToAccount() {
+            event.preventDefault();
+            window.location.href = "account.html"; // redirect to account.html
+        }
+    </script>
+</body>
+</html>
