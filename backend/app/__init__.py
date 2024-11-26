@@ -6,6 +6,7 @@ from app.data.routes import data_blueprint
 from app.concert.routes import concert_blueprint
 from app.payment.routes import payment_blueprint
 from app.ticket.routes import ticket_blueprint
+from app.user.routes import user_blueprint
 from app.utils.config import load_env_variables
 
 def create_app():
@@ -25,5 +26,6 @@ def create_app():
     app.register_blueprint(concert_blueprint, url_prefix='/concerts')
     app.register_blueprint(payment_blueprint, url_prefix='/payment')
     app.register_blueprint(ticket_blueprint, url_prefix='/ticket')
+    app.register_blueprint(user_blueprint, url_prefix='/user')
 
     return app
