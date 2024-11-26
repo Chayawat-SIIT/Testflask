@@ -41,12 +41,12 @@ def fetch_payments(uid):
 
         # Fetch payments and concert details for a specific user
         cursor.execute("""
-            SELECT payments.tid, payments.tdate_time, payments.tstatus, 
+            SELECT payment.tid, payment.tdate_time, payment.tstatus, 
                    tickets.tktype, concert.concert_name
-            FROM payments
-            JOIN tickets ON payments.tid = tickets.tkid
+            FROM payment
+            JOIN tickets ON payment.tid = tickets.tkid
             JOIN concert ON tickets.cid = concert.cid
-            WHERE payments.uid = %s
+            WHERE payment.uid = %s
         """, (uid,))
         payments = cursor.fetchall()
 
