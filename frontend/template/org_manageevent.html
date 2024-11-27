@@ -20,7 +20,7 @@
     </header>    
     
     <main>
-        <h1>Manage Your Events</h1>
+        <h1 style="margin-bottom: -60px;">Manage Your Events</h1>
         <div id="concert-list">
             <!-- Concert cards will be injected here dynamically -->
         </div>
@@ -91,7 +91,7 @@
       const user_type = localStorage.getItem('user_type');
   
       // Check if the user is logged in
-      if (!uid || !username || !email || !phone_num || user_type != 'organizer') {
+      if (!uid || !username || !email || !phone_num /*|| user_type != 'organizer'*/) {
         window.location.href = "login.html"; // Redirect to login if not logged in
       } else {
         // Display the user details
