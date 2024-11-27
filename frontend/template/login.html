@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log In | Concert Ticketing System</title>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="../static/img/logo.png"
+    />
+    <link rel="stylesheet" href="../static/style.css" />
+  </head>
+  <body style="overflow: hidden">
+    <header>
+      <nav>
+        <a href="home.html">
+          <img src="../static/img/logo.png" alt="Logo" />
+        </a>
+        <a href="concert.html">Concerts</a>
+        <a href="about.html">About Us</a>
+        <a href="account.html">My Account</a>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Log In</h1>
+      <div class="login-container">
+        <form id="loginForm">
+          <div>
+            <label for="username"><h6>Username :</h6></label>
+            <input type="text" id="username" name="username" required />
+            <label for="password"><h6>Password :</h6></label>
+            <input type="password" id="password" name="password" required />
+          </div>
+          <input type="submit" name="LogIn" value="Log In" />
+          <p style="text-align: center">Don't have an account yet?</p>
+          <a id="goSignUp" href="signup.html">Create an Account</a>
+        </form>
+      </div>
+    </main>
+
+    <script src="../static/config.js"></script>
+    <script>
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+    
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+    
+          try {
+            const response = await fetch(`${BACKEND_URL}/user/login`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ username, password }),
+            });
+    
+            if (response.ok) {
+              const data = await response.json();
+              // alert("Login successful!");
+    
+              // Store user data in localStorage for use on the account page
+              localStorage.setItem("uid", data.uid);
+              localStorage.setItem("username", data.username);
+              localStorage.setItem("email", data.email);
+              localStorage.setItem("phone_num", data.phone_num);
+
+              if (data.organized_id)
+              {
+                localStorage.setItem("organized_id", data.organized_id);
+                window.location.href = "org_account.html";
+              }
+              
+              // Redirect to the account page
+              const user_type = localStorage.getItem('user_type');
+              if (user_type === 'organizer') {
+                window.location.href = "org_account.html"
+              }
+              else {
+                window.location.href = "account.html";
+              }
+            } else {
+              const errorData = await response.json();
+              // alert(errorData.error || "Login failed!");
+              alert("Incorrect Username or Password\nPlease try again")
+            }
+          } catch (error) {
+            console.error("Error during login:", error);
+            alert("An error occurred. Please try again.");
+          }
+        });
+    </script>    
+  </body>
+</html>

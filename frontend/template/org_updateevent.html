@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Event | Concert Ticketing System</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/logo.png">
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body style="overflow: hidden;">
+    <header>
+        <nav>
+            <a href="home.html">
+                <img src="../static/img/logo.png" alt=" ">
+            </a>
+            <a href="org_createevent.html">Create Events</a>
+            <a href="org_manageevent.html">Manage Events</a>
+            <a href="org_account.html">My Account</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="concert-card" style="height: 540px; width: 800px; margin-top: 140px;">            
+            <section class="user-details">
+                <h2>Event Details</h2>
+                <form id="accountForm" method="post">
+                    <div class="form-group">
+                        <label for="eventname">Event Name</label>
+                        <input type="text" id="eventname" name="eventname"> <!-- fetch these data from DB -->
+                    </div>
+                    <div class="form-group">
+                        <label for="eventdate">Date</label>
+                        <input type="date" id="eventdate" name="eventdate"> <!-- fetch these data from DB -->
+                    </div>
+                    <div class="form-group">
+                        <label for="eventdesc   ">Event Description</label>
+                        <input type="text" id="eventdesc" name="eventdesc"> <!-- fetch these data from DB -->
+                    </div>
+                    <div class="form-group">
+                        <label for="eventimage">Upload New Image</label>
+                        <input type="file" id="eventimage" name="eventimage">
+                    </div>
+                </form>
+                <button>Update Event</button>
+            </section>
+        </div>
+    </main>
+</body>
+</html>
+
+<script>
+    window.onload = function() {
+      // Retrieve user data from localStorage
+      const uid = localStorage.getItem("uid");
+      const username = localStorage.getItem("username");
+      const email = localStorage.getItem("email");
+      const phone_num = localStorage.getItem("phone_num");
+      const user_type = localStorage.getItem('user_type');
+  
+      // Check if the user is logged in
+      if (!uid || !username || !email || !phone_num /*|| user_type != 'organizer'*/) {
+        window.location.href = "login.html"; // Redirect to login if not logged in
+      } else {
+        // Display the user details
+        document.getElementById("username").innerText = username;
+        document.getElementById("email").innerText = email;
+        document.getElementById("phone").innerText = phone_num;
+      }
+    };
+</script>

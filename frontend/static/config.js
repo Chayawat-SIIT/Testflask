@@ -1,0 +1,1 @@
+const BACKEND_URL = "http://backend-alb-83162907.us-east-1.elb.amazonaws.com";

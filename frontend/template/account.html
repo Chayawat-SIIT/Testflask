@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account | Concert Ticketing System</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/logo.png">
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body style="overflow: hidden;">
+    <header>
+        <nav>
+            <a href="home.html">
+                <img src="../static/img/logo.png" alt=" ">
+            </a>
+            <a href="concert.html">Concerts</a>
+            <a href="about.html">About Us</a>
+            <a href="account.html">My Account</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>My Account</h1>
+        <div class="concert-card" style="height: 470px;">
+            <section class="user-details" style="margin-top: -75px;">
+                <h2>User Details</h2>
+                <form id="accountForm" method="post">
+                    <div class="form-group" style="display: flex; padding-bottom: 15px;">
+                        <label for="username">Username</label>
+                        <p style="margin: 0 0 0 60px;"><span id="username"></span></p>
+                    </div>
+                    <div class="form-group" style="display: flex; padding-bottom: 15px;">
+                        <label for="email">Email Address</label>
+                        <p style="margin: 0 0 0 28px;"><span id="email"></span></p>
+                    </div>
+                    <div class="form-group" style="display: flex; padding-bottom: 15px;">
+                        <label for="phone">Phone Number</label>
+                        <p style="margin: 0 0 0 24px;"><span id="phone"></span></p>
+                    </div>
+                    <div class="form-group" style="display: flex; padding-bottom: 15px;">
+                        <label for="userType">User Type</label>
+                        <p style="margin: 0 0 0 60px;"><span id="userType"></p>
+                        </select>
+                    </div>
+                    <button id="logout">Log Out</button>
+                </form>
+            </section>
+
+            <section class="user-tickets">
+                <h2>Your Tickets</h2>
+                <div class="concert-card" style="height: 240px;">
+                    <img src="../static/img/concert1.jpg" alt="" style="width: 28%; padding: none; margin-right: -7%;">
+                    <div class="concert-info">
+                        <h3>Rock Fest 2024</h3>
+                        <p>Electrifying performances by top rock bands, with a mix of classic anthems and fresh new sounds</p>
+                        <button>View Ticket</button>
+                    </div>
+                </div>
+                <div class="concert-card" style="height: 240px;">
+                    <img src="../static/img/concert5.jpg" alt="" style="width: 28%; padding: none; margin-right: -7%;">
+                    <div class="concert-info">                    
+                        <h3>Indie Vibes 2025</h3>
+                        <p>Enjoy an eclectic mix of indie rock, folk, and electronic tunes from up-and-coming artists.</p>
+                        <button>View Ticket</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+</html>
+
+<script>
+    window.onload = function() {
+      // Retrieve user data from localStorage
+      const uid = localStorage.getItem("uid");
+      const username = localStorage.getItem("username");
+      const email = localStorage.getItem("email");
+      const phone_num = localStorage.getItem("phone_num");
+  
+      // Check if the user is logged in
+      if (!uid || !username || !email || !phone_num) {
+        window.location.href = "login.html"; // Redirect to login if not logged in
+      } else {
+        // Display the user details
+        document.getElementById("username").innerText = username;
+        document.getElementById("email").innerText = email;
+        document.getElementById("phone").innerText = phone_num;
+        document.getElementById("userType").innerText = "VIP";      // resolve this in DB
+      }
+
+      document.getElementById("logout").addEventListener("click", function() {
+        // Clear the user data from localStorage
+        localStorage.removeItem("uid");
+        localStorage.removeItem("username");
+        localStorage.removeItem("email");
+        localStorage.removeItem("phone_num");
+        
+        window.location.href = "home.html";
+      });
+    };
+</script>
