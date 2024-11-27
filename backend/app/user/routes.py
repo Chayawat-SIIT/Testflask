@@ -42,7 +42,7 @@ def login_user():
                     "username": username,
                     "email": email,
                     "phone_num": phone_num,
-                    "ogrganized_id": organized_id
+                    "organized_id": organized_id
                 }), 200
             else:
                 return jsonify({"error": "Invalid password"}), 401
