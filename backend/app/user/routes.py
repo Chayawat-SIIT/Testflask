@@ -22,7 +22,7 @@ def login_user():
         cursor = connection.cursor()
 
         # Check if the username exists
-        cursor.execute("SELECT uid, username, email, phone_num, password FROM public.user WHERE username = %s", (username,))
+        cursor.execute("SELECT uid, username, email, phone_num, organized, password FROM public.user WHERE username = %s", (username,))
         user = cursor.fetchone()
 
         if user:
@@ -31,6 +31,7 @@ def login_user():
             email = user['email']
             phone_num = user['phone_num']
             password_check = user['password']
+            organized_id = user['organized']
 
             # Verify the password
             if password_check == password:
@@ -40,7 +41,8 @@ def login_user():
                     "uid": user_id,
                     "username": username,
                     "email": email,
-                    "phone_num": phone_num
+                    "phone_num": phone_num,
+                    "ogrganized_id": organized_id
                 }), 200
             else:
                 return jsonify({"error": "Invalid password"}), 401
@@ -66,6 +68,7 @@ def register_user():
         email = data.get('email')
         phone_num = data.get('phone_num')
         plain_password = data.get('password')
+        organized_id = data.get('organized_id')  # New field
 
         # Validate required fields
         if not full_name or not username or not email or not phone_num or not plain_password:
@@ -79,27 +82,35 @@ def register_user():
         cursor.execute("SELECT * FROM public.user WHERE username = %s", (username,))
         if cursor.fetchone():
             return jsonify({"error": "Username already exists"}), 400
-        
+
         # Check if the email already exists
         cursor.execute("SELECT * FROM public.user WHERE email = %s", (email,))
         if cursor.fetchone():
             return jsonify({"error": "Email already exists"}), 400
 
         # Insert the new user into the database
-        cursor.execute(
-            "INSERT INTO public.user (full_name, username, email, phone_num, password) "
-            "VALUES (%s, %s, %s, %s, %s) RETURNING uid",
-            (full_name, username, email, phone_num, plain_password)
-        )
+        if organized_id:
+            # Include `organized_id` in the query if provided
+            cursor.execute(
+                "INSERT INTO public.user (full_name, username, email, phone_num, password, organized) "
+                "VALUES (%s, %s, %s, %s, %s, %s) RETURNING uid",
+                (full_name, username, email, phone_num, plain_password, organized_id)
+            )
+        else:
+            # Regular user insertion without `organized_id`
+            cursor.execute(
+                "INSERT INTO public.user (full_name, username, email, phone_num, password) "
+                "VALUES (%s, %s, %s, %s, %s) RETURNING uid",
+                (full_name, username, email, phone_num, plain_password)
+            )
 
         # Fetch the inserted user ID
         user = cursor.fetchone()
 
         if user:
-            username = user['username']
+            uid = user[0]
             connection.commit()  # Commit the transaction
-            print(f"User registered successfully with username: {username}")
-            return jsonify({"message": "User registered successfully", "uid": username,}), 201
+            return jsonify({"message": "User registered successfully", "uid": uid}), 201
         else:
             raise Exception("Failed to fetch user_id after insert")
 
