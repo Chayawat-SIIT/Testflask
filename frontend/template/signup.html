@@ -14,8 +14,6 @@
                 <img src="../static/img/logo.png" alt="Logo">
             </a>
             <a href="concert.html">Concerts</a>
-            <a href="signup.html">Sign Up</a>
-            <a href="login.html">Log In</a>
             <a href="about.html">About Us</a>
             <a href="account.html">My Account</a>
         </nav>
@@ -23,28 +21,48 @@
     
     <main>
         <h1>Sign Up</h1>
-        <div class="signup-container">
+        <div class="signup-container" style="width: 80%">
             <form id="signupForm">
-                <div>
-                    <label for="full_name"><h6>Full Name :</h6></label>
-                    <input type="text" id="full_name" name="full_name" required>
-                    <label for="username"><h6>Username :</h6></label>
-                    <input type="text" id="username" name="username" required>
-                    <label for="email"><h6>Email Address :</h6></label>
-                    <input type="email" id="email" name="email" required>
-                    <label for="phone_num"><h6>Phone Number :</h6></label>
-                    <input type="text" id="phone_num" name="phone_num" required>
-                </div>
-                <div>
-                    <label for="password"><h6>Password :</h6></label>
-                    <div style="display: flex;">
-                        <input type="password" id="password" name="password" required>
-                        <button type="button" id="passwordVis" onclick="togglePasswordVisibility()">
-                            <h6 style="margin: -1px 0 0 -15px;">S/H</h6>
-                        </button>
+                <div style="display: flex;">
+                    <div style="width: 50%; padding-right: 2%">
+                        <label for="full_name"><h6>Full Name :</h6></label>
+                        <input type="text" id="full_name" name="full_name" required>
+                    </div>
+                    <div style="width: 50%; padding-right: 2%">
+                        <label for="username"><h6>Username :</h6></label>
+                        <input type="text" id="username" name="username" required>
                     </div>
                 </div>
-                
+                <div style="display: flex;">
+                    <div style="width: 50%; padding-right: 2%">
+                        <label for="email"><h6>Email Address :</h6></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div style="width: 50%; padding-right: 2%">
+                        <label for="phone_num"><h6>Phone Number :</h6></label>
+                        <input type="text" id="phone_num" name="phone_num" required>
+                    </div>
+                </div>
+                <div style="display: flex;">
+                    <div style="width: 50%; padding-right: 2%">
+                        <label for="password"><h6>Password :</h6></label>
+                        <div style="display: flex;">
+                            <input type="password" id="password" name="password" required>
+                            <button type="button" id="passwordVis" onclick="togglePasswordVisibility()">
+                                <h6 style="margin: -1px 0 0 -15px;">S/H</h6>
+                            </button>
+                        </div>
+                    </div>
+                    <div style="width: 50%; padding-right: 2%">
+                        <label for="passwordcf"><h6>Confirm Password :</h6></label>
+                        <input type="passwordcf" id="passwordcf" name="passwordcf" required>
+                    </div>
+                </div>
+                <br />
+                <div style="display: flex; margin: auto;">
+                    <input type="checkbox" id="org-checkbox" onchange="setUserType()">I am here to Create and Organize Events!
+                </div>
+                <br />                
                 <input type="submit" value="Sign Up">
                 <br />
                 <p style="text-align: center; position: relative; bottom: 35px;">Already a Member?<a id="goLogIn" href="login.html">Log In</a></p>
@@ -59,6 +77,12 @@
             const passwordFieldType = passwordField.getAttribute('type');
             passwordField.setAttribute('type', passwordFieldType === 'password' ? 'text' : 'password');
         }
+
+        function setUserType() {
+            const checkbox = document.getElementById('org-checkbox');
+            const user_type = checkbox.checked ? 'organizer' : 'normal';
+        }
+
 
         document.getElementById("signupForm").addEventListener("submit", async (event) => {
             event.preventDefault();
