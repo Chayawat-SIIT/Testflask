@@ -108,7 +108,7 @@ def register_user():
         user = cursor.fetchone()
 
         if user:
-            uid = user[0]
+            uid = user['uid']
             connection.commit()  # Commit the transaction
             return jsonify({"message": "User registered successfully", "uid": uid}), 201
         else:
