@@ -66,7 +66,13 @@
               localStorage.setItem("username", data.username);
               localStorage.setItem("email", data.email);
               localStorage.setItem("phone_num", data.phone_num);
-    
+
+              if (data.organized_id)
+              {
+                localStorage.setItem("organized_id", data.organized_id);
+                window.location.href = "org_account.html";
+              }
+              
               // Redirect to the account page
               const user_type = localStorage.getItem('user_type');
               if (user_type === 'organizer') {

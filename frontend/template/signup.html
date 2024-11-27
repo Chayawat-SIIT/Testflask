@@ -55,12 +55,22 @@
                     </div>
                     <div style="width: 50%; padding-right: 2%">
                         <label for="passwordcf"><h6>Confirm Password :</h6></label>
-                        <input type="passwordcf" id="passwordcf" name="passwordcf" required>
+                        <input type="password" id="passwordcf" name="passwordcf" required>
                     </div>
                 </div>
                 <br />
-                <div style="display: flex; margin: auto;">
-                    <input type="checkbox" id="org-checkbox" onchange="setUserType()">I am here to Create and Organize Events!
+                <div style="display: flex; align-items: center; margin: auto;">
+                    <!-- Checkbox with label -->
+                    <input type="checkbox" id="org-checkbox" onchange="setUserType()" style="margin-right: 10px;">
+                    <span style="margin-right: 20px;">I am here to Create and Organize Events!</span>
+                    
+                    <!-- Organizer options -->
+                    <div id="organizer-options" style="display: none; display: flex; align-items: center;">
+                        <label for="organized_id" style="margin-right: 10px;">Select Organizer ID:</label>
+                        <select id="organized_id" name="organized_id" >
+                            <option value="" disabled selected>Select a number</option>
+                        </select>
+                    </div>
                 </div>
                 <br />                
                 <input type="submit" value="Sign Up">
@@ -80,10 +90,37 @@
 
         function setUserType() {
             const checkbox = document.getElementById('org-checkbox');
+            const organizerOptions = document.getElementById('organizer-options');
+            const organizedIdSelect = document.getElementById('organized_id');
             const user_type = checkbox.checked ? 'organizer' : 'normal';
             localStorage.setItem('user_type', user_type);   // to forward to LogIn
+
+            // Show or hide organizer options based on the checkbox
+            if (checkbox.checked) {
+                organizerOptions.style.display = "block";
+
+                // Populate the dropdown with numbers 1-10 if not already populated
+                if (organizedIdSelect.options.length <= 1) {
+                    for (let i = 1; i <= 10; i++) {
+                        const option = document.createElement("option");
+                        option.value = i;
+                        option.textContent = i;
+                        organizedIdSelect.appendChild(option);
+                    }
+                }
+            } else {
+                organizerOptions.style.display = "none";
+            }
         }
 
+        // Check the checkbox state on page load and hide organizer options if not checked
+        window.onload = function() {
+            const checkbox = document.getElementById('org-checkbox');
+            const organizerOptions = document.getElementById('organizer-options');
+            if (!checkbox.checked) {
+                organizerOptions.style.display = "none";
+            }
+        };
 
         document.getElementById("signupForm").addEventListener("submit", async (event) => {
             event.preventDefault();
@@ -93,12 +130,32 @@
             const email = document.getElementById("email").value;
             const phone_num = document.getElementById("phone_num").value;
             const password = document.getElementById("password").value;
+            const isOrganizer = document.getElementById("org-checkbox").checked;
+            const organized_id = isOrganizer ? document.getElementById("organized_id").value : null;
+
+            // Ensure organized_id is selected if the user is an organizer
+            if (isOrganizer && !organized_id) {
+                alert("Please select an Organizer ID.");
+                return;
+            }
+
+            const userData = {
+                full_name,
+                username,
+                email,
+                phone_num,
+                password,
+            };
+
+            if (isOrganizer) {
+                userData.organized_id = organized_id;
+            }
 
             try {
                 const response = await fetch(`${BACKEND_URL}/user/register`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ full_name, username, email, phone_num, password })
+                    body: JSON.stringify(userData),
                 });
 
                 if (response.ok) {
@@ -113,6 +170,7 @@
                 alert("An error occurred. Please try again.");
             }
         });
+
     </script>
 </body>
 </html>
