@@ -14,7 +14,7 @@ Welcome to the **G-10 Cloud-Based Application Project** repository! This reposit
 │   └── Template       # Other HTML file
 ├── backend/           # Backend source code
 │   ├── Dockerfile     # Dockerfile for backend container
-│   ├── app.py         # Main Python application file
+│   ├── run.py         # Main Python application file
 │   ├── requirements.txt # Python dependencies
 │   └── ...            # Other backend scripts and modules
 └── README.md          # Project documentation
