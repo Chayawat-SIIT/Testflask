@@ -241,7 +241,7 @@ main button:hover {
   font-size: 14px;
 }
 
-#full_name, #username, #email, #phone, #password, #passwordcf, #eventname, #eventdate, #eventdesc, #eventimage, #phone_num {
+#full_name, #username, #email, #phone, #userType, #password, #passwordcf, #eventname, #eventdate, #eventdesc, #eventimage, #phone_num {
   height: 40px;
   padding: 10px;
   margin-bottom: 5px;
