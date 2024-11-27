@@ -13,14 +13,14 @@
             <a href="home.html">
                 <img src="../static/img/logo.png" alt=" ">
             </a>
-            <a href="concert.html">Concerts</a>
-            <a href="about.html">About Us</a>
-            <a href="account.html">My Account</a>
+            <a href="org_createevent.html">Create Events</a>
+            <a href="org_manageevent.html">Manage Events</a>
+            <a href="org_account.html">My Account</a>
         </nav>
     </header>    
     
     <main>
-        <h1>Upcoming Concerts</h1>
+        <h1>Manage Your Events</h1>
         <div id="concert-list">
             <!-- Concert cards will be injected here dynamically -->
         </div>
@@ -56,8 +56,8 @@
                                 <div class="concert-txt">
                                     <h3 class="h3">${concert.cname}</h3>
                                     <p>Event Date & Time: ${formattedDate}</p>
-                                    <a href="ticket.html?cid=${concert.cid}">
-                                        <button>Buy Tickets</button>
+                                    <a href="org_updateevent.html?cid=${concert.cid}">
+                                        <button>Update Event</button>
                                     </a>
                                 </div>
                             </div>
@@ -80,3 +80,24 @@
     </script>
 </body>
 </html>
+
+<script>
+    window.onload = function() {
+      // Retrieve user data from localStorage
+      const uid = localStorage.getItem("uid");
+      const username = localStorage.getItem("username");
+      const email = localStorage.getItem("email");
+      const phone_num = localStorage.getItem("phone_num");
+      const user_type = localStorage.getItem('user_type');
+  
+      // Check if the user is logged in
+      if (!uid || !username || !email || !phone_num || user_type != 'organizer') {
+        window.location.href = "login.html"; // Redirect to login if not logged in
+      } else {
+        // Display the user details
+        document.getElementById("username").innerText = username;
+        document.getElementById("email").innerText = email;
+        document.getElementById("phone").innerText = phone_num;
+      }
+    };
+</script>

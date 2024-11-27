@@ -92,6 +92,9 @@
             const checkbox = document.getElementById('org-checkbox');
             const organizerOptions = document.getElementById('organizer-options');
             const organizedIdSelect = document.getElementById('organized_id');
+            const user_type = checkbox.checked ? 'organizer' : 'normal';
+            localStorage.setItem('user_type', user_type);   // to forward to LogIn
+        }
 
             // Show or hide organizer options based on the checkbox
             if (checkbox.checked) {
@@ -109,7 +112,6 @@
             } else {
                 organizerOptions.style.display = "none";
             }
-        }
 
         document.getElementById("signupForm").addEventListener("submit", async (event) => {
             event.preventDefault();
