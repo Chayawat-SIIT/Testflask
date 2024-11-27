@@ -70,7 +70,7 @@ You can run the application locally using one of two methods:
      ```
    - Run the backend application:
      ```bash
-     python app.py
+     python run.py
      ```
 
 2. **Frontend Setup**:
