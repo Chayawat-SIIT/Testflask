@@ -11,7 +11,7 @@
     <header>
         <nav>
             <a href="home.html">
-                <img src="../static/img/logo.png" alt=" ">
+                <img src="../static/img/logo.png" alt="Logo">
             </a>
             <a href="concert.html">Concerts</a>
             <a href="signup.html">Sign Up</a>
@@ -24,14 +24,16 @@
     <main>
         <h1>Sign Up</h1>
         <div class="signup-container">
-            <form id="signupForm" action="" method="post">
+            <form id="signupForm">
                 <div>
+                    <label for="full_name"><h6>Full Name :</h6></label>
+                    <input type="text" id="full_name" name="full_name" required>
                     <label for="username"><h6>Username :</h6></label>
                     <input type="text" id="username" name="username" required>
                     <label for="email"><h6>Email Address :</h6></label>
                     <input type="email" id="email" name="email" required>
-                    <label for="phone"><h6>Phone Number :</h6></label>
-                    <input type="text" id="phone" name="phone" required>
+                    <label for="phone_num"><h6>Phone Number :</h6></label>
+                    <input type="text" id="phone_num" name="phone_num" required>
                 </div>
                 <div>
                     <label for="password"><h6>Password :</h6></label>
@@ -43,47 +45,47 @@
                     </div>
                 </div>
                 
-                <input type="submit" name="SignUp" value="Sign Up">
+                <input type="submit" value="Sign Up">
                 <br />
                 <p style="text-align: center; position: relative; bottom: 35px;">Already a Member?<a id="goLogIn" href="login.html">Log In</a></p>
             </form>
         </div>
     </main>
 
+    <script src="../static/config.js"></script>
     <script>
-        // THIS ONE IS CURRENTLY IN USE
         function togglePasswordVisibility() {
             const passwordField = document.getElementById('password');
             const passwordFieldType = passwordField.getAttribute('type');
             passwordField.setAttribute('type', passwordFieldType === 'password' ? 'text' : 'password');
         }
 
-        document.getElementById('password').addEventListener('input', function() {
-            const password = this.value;
-            const feedback = passwordAnalyser(password);
-            document.getElementById('passwordStrength').textContent = feedback[0];
-            document.getElementById('passwordMissing').textContent = feedback[1];
-        });
-        
-        // UNUSED
-        document.getElementById("signup-form").addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const name = document.getElementById("name").value;
+        document.getElementById("signupForm").addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            const full_name = document.getElementById("full_name").value;
+            const username = document.getElementById("username").value;
             const email = document.getElementById("email").value;
+            const phone_num = document.getElementById("phone_num").value;
             const password = document.getElementById("password").value;
+
             try {
-                const response = await fetch("https://your-api-url/signup", {
+                const response = await fetch(`${BACKEND_URL}/user/register`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ name, email, password })
+                    body: JSON.stringify({ full_name, username, email, phone_num, password })
                 });
+
                 if (response.ok) {
-                    alert("Sign up successful!");
+                    alert("Sign up successful! You can now log in.");
+                    window.location.href = "login.html";
                 } else {
-                    alert("Error signing up.");
+                    const errorData = await response.json();
+                    alert(errorData.error || "Error signing up. Please try again.");
                 }
             } catch (error) {
-                console.error(error);
+                console.error("Sign up error:", error);
+                alert("An error occurred. Please try again.");
             }
         });
     </script>

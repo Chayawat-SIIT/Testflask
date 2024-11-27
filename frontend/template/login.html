@@ -1,76 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Log In | Concert Ticketing System</title>
-    <link rel="shortcut icon" type="image/x-icon" href="../static/img/logo.png">
-    <link rel="stylesheet" href="../static/style.css">
-</head>
-<body style="overflow: hidden;">
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="../static/img/logo.png"
+    />
+    <link rel="stylesheet" href="../static/style.css" />
+  </head>
+  <body style="overflow: hidden">
     <header>
-        <nav>
-            <a href="home.html">
-                <img src="../static/img/logo.png" alt=" ">
-            </a>
-            <a href="concert.html">Concerts</a>
-            <a href="signup.html">Sign Up</a>
-            <a href="login.html">Log In</a>
-            <a href="about.html">About Us</a>
-            <a href="account.html">My Account</a>
-        </nav>
-    </header>  
+      <nav>
+        <a href="home.html">
+          <img src="../static/img/logo.png" alt="Logo" />
+        </a>
+        <a href="concert.html">Concerts</a>
+        <a href="signup.html">Sign Up</a>
+        <a href="login.html">Log In</a>
+        <a href="about.html">About Us</a>
+        <a href="account.html">My Account</a>
+      </nav>
+    </header>
 
     <main>
-        <h1>Log In</h1>
-        <div class="login-container">
-            <form id="loginForm" action="" method="post" onsubmit="redirectToAuthen()">
-                <!-- sends data to itself but redirects to authen -->
-                <div>
-                    <label for="username"><h6>Username :</h6></label>
-                    <input type="text" id="username" name="username">
-                    <label for="password"><h6>Password :</h6></label>
-                    <input type="password" id="password" name="password">
-                </div>
-                <input type="submit" name="LogIn" value="Log In">
-                <p style="text-align: center"> Doesn't have an account yet?</p>
-                <a id="goSignUp" href="signup.html">Create an Account</a>
-            </form>
-        </div>
+      <h1>Log In</h1>
+      <div class="login-container">
+        <form id="loginForm">
+          <div>
+            <label for="username"><h6>Username :</h6></label>
+            <input type="text" id="username" name="username" required />
+            <label for="password"><h6>Password :</h6></label>
+            <input type="password" id="password" name="password" required />
+          </div>
+          <input type="submit" name="LogIn" value="Log In" />
+          <p style="text-align: center">Don't have an account yet?</p>
+          <a id="goSignUp" href="signup.html">Create an Account</a>
+        </form>
+      </div>
     </main>
-    
+
+    <script src="../static/config.js"></script>
     <script>
-        function redirectToAuthen() {
-            event.preventDefault();
-            window.location.href = "authen.html"; // redirect to authen.html
-        }
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
 
-        // GPT-Generated; UNUSED
-        document.getElementById("login-form").addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
 
-            try {
-                const response = await fetch("https://your-api-url/login", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ email, password })
-                });
+          try {
+            const response = await fetch(`${BACKEND_URL}/user/login`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ username, password }),
+            });
 
-                if (response.ok) {
-                    const { token, userId } = await response.json();
-                    localStorage.setItem("authToken", token);
-                    localStorage.setItem("userId", userId);
-                    alert("Login successful!");
-                    window.location.href = "account.html";
-                } else {
-                    alert("Invalid credentials.");
-                }
-            } catch (error) {
-                console.error("Error during login:", error);
+            if (response.ok) {
+              const data = await response.json();
+              alert("Login successful!");
+              localStorage.setItem("uid", data.uid);
+              window.location.href = "account.html";
+            } else {
+              const errorData = await response.json();
+              alert(errorData.error || "Login failed!");
             }
+          } catch (error) {
+            console.error("Error during login:", error);
+            alert("An error occurred. Please try again.");
+          }
         });
     </script>
-</body>
+  </body>
 </html>
