@@ -48,21 +48,28 @@
         .getElementById("loginForm")
         .addEventListener("submit", async (event) => {
           event.preventDefault();
-
+    
           const username = document.getElementById("username").value;
           const password = document.getElementById("password").value;
-
+    
           try {
             const response = await fetch(`${BACKEND_URL}/user/login`, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ username, password }),
             });
-
+    
             if (response.ok) {
               const data = await response.json();
               alert("Login successful!");
+    
+              // Store user data in localStorage for use on the account page
               localStorage.setItem("uid", data.uid);
+              localStorage.setItem("username", data.username);
+              localStorage.setItem("email", data.email);
+              localStorage.setItem("phone_num", data.phone_num);
+    
+              // Redirect to the account page
               window.location.href = "account.html";
             } else {
               const errorData = await response.json();
@@ -73,6 +80,6 @@
             alert("An error occurred. Please try again.");
           }
         });
-    </script>
+    </script>    
   </body>
 </html>

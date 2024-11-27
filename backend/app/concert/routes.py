@@ -4,7 +4,7 @@ from app.data.db import get_db_connection
 concert_blueprint = Blueprint('concerts', __name__)
 
 # Get Concerts (Fetch all concert details sorted by cdate_time)
-@concert_blueprint.route('/concerts', methods=['GET'])
+@concert_blueprint.route('/', methods=['GET'])
 def get_concerts():
     connection = None
     try:
@@ -24,7 +24,7 @@ def get_concerts():
 
 
 # Create Concert (Add a new concert)
-@concert_blueprint.route('/concerts', methods=['POST'])
+@concert_blueprint.route('/', methods=['POST'])
 def create_concert():
     connection = None
     try:
@@ -57,7 +57,7 @@ def create_concert():
 
 
 # Update Concert (Modify existing concert details using the concert ID)
-@concert_blueprint.route('/concerts/<int:cid>', methods=['PUT'])
+@concert_blueprint.route('/<int:cid>', methods=['PUT'])
 def update_concert(cid):
     connection = None
     try:
@@ -97,7 +97,7 @@ def update_concert(cid):
 
 
 # Delete Concert (Remove a concert from the database by its ID)
-@concert_blueprint.route('/concerts/<int:cid>', methods=['DELETE'])
+@concert_blueprint.route('/<int:cid>', methods=['DELETE'])
 def delete_concert(cid):
     connection = None
     try:

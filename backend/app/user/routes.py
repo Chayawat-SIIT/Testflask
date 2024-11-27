@@ -22,17 +22,26 @@ def login_user():
         cursor = connection.cursor()
 
         # Check if the username exists
-        cursor.execute("SELECT uid, password FROM public.user WHERE username = %s", (username,))
+        cursor.execute("SELECT uid, username, email, phone_num, password FROM public.user WHERE username = %s", (username,))
         user = cursor.fetchone()
 
         if user:
             user_id = user['uid']
-            plain_password = user['password']
+            username = user['username']
+            email = user['email']
+            phone_num = user['phone_num']
+            password_check = user['password']
 
             # Verify the password
-            if plain_password == password:
+            if password_check == password:
                 # Successful login
-                return jsonify({"message": "Login successful", "uid": user_id}), 200
+                return jsonify({
+                    "message": "Login successful",
+                    "uid": user_id,
+                    "username": username,
+                    "email": email,
+                    "phone_num": phone_num
+                }), 200
             else:
                 return jsonify({"error": "Invalid password"}), 401
         else:
@@ -84,13 +93,13 @@ def register_user():
         )
 
         # Fetch the inserted user ID
-        user_id = cursor.fetchone()
+        user = cursor.fetchone()
 
-        if user_id:
-            user_id = user_id['uid']
+        if user:
+            username = user['username']
             connection.commit()  # Commit the transaction
-            print(f"User registered successfully with user_id: {user_id}")
-            return jsonify({"message": "User registered successfully", "uid": user_id}), 201
+            print(f"User registered successfully with username: {username}")
+            return jsonify({"message": "User registered successfully", "uid": username,}), 201
         else:
             raise Exception("Failed to fetch user_id after insert")
 

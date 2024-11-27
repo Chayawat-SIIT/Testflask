@@ -23,90 +23,62 @@
     
     <main>
         <h1>Upcoming Concerts</h1>
-        <div>
-            <div class="concert-card">
-                <img src="../static/img/concert01.jpg" alt="">
-                <div class="concert-info">                    
-                    <h3>Indie Vibes 2025</h3>
-                    <p>Enjoy an eclectic mix of indie rock, folk, and electronic tunes from up-and-coming artists.</p>
-                    <a href="ticket.html"><button>Buy Tickets</button></a>
-                </div>
-            </div>
-            <div class="concert-card">
-                <img src="../static/img/concert02.jpg" alt="">
-                <div class="concert-info">
-                    <h3>Jazz Night 2025</h3>
-                    <p>Immerse yourself in world-class jazz performances by renowned artists in a cozy, intimate setting.</p>
-                    <a href="ticket.html"><button>Buy Tickets</button></a>
-                </div>
-            </div>
-            <div class="concert-card">
-                <img src="../static/img/concert03.jpg" alt="">
-                <div class="concert-info">
-                    <h3>Rock Fest 2024</h3>
-                    <p>Electrifying performances by top rock bands, with a mix of classic anthems and fresh new sounds</p>
-                    <a href="ticket.html"><button>Buy Tickets</button></a>
-                </div>
-            </div>
-            <div class="concert-card">
-                <img src="../static/img/concert04.jpg" alt="">
-                <div class="concert-info">
-                    <h3>Classical Evening 2025</h3>
-                    <p>Experience timeless masterpieces performed by an exceptional orchestra in a grand venue.</p>
-                    <a href="ticket.html"><button>Buy Tickets</button></a>
-                </div>
-            </div>
-            <div class="concert-card">
-                <img src="../static/img/concert05.jpg" alt="">
-                <div class="concert-info">
-                    <h3>Pop Hits 2025</h3>
-                    <p>Celebrate the biggest chart-topping hits with lively performances by your favorite pop stars.</p>
-                    <a href="ticket.html"><button>Buy Tickets</button></a>
-                </div>
-            </div>
-            <div class="concert-card">
-                <img src="../static/img/concert06.jpg" alt="">
-                <div class="concert-info">                    
-                    <h3>Symphony of the Stars</h3>
-                    <p>Experience a breathtaking night under the stars with timeless orchestral masterpieces.</p>
-                    <a href="ticket.html"><button>Buy Tickets</button></a>
-                </div>
-            </div>
-            <div class="concert-card">
-                <img src="../static/img/concert07.jpg" alt="">
-                <div class="concert-info">
-                    <h3>Echoes of Eternity</h3>
-                    <p>Let the captivating melodies of Echoes of Eternity transport you through the ages in a concert of celestial beauty.</p>
-                    <a href="ticket.html"><button>Buy Tickets</button></a>
-                </div>
-            </div>
-            <div class="concert-card">
-                <img src="../static/img/concert08.jpg" alt="">
-                <div class="concert-info">
-                    <h3>Rhythm Revolution 2025</h3>
-                    <p>Get ready for an electrifying musical journey, where every beat sparks a new wave of sound!</p>
-                    <a href="ticket.html"><button>Buy Tickets</button></a>
-                </div>
-            </div>
-            <div class="concert-card">
-                <img src="../static/img/concert09.jpg" alt="">
-                <div class="concert-info">
-                    <h3>Harmonic Horizon</h3>
-                    <p>Step into a world where music meets the future, a celebration of innovative soundscapes.</p>
-                    <a href="ticket.html"><button>Buy Tickets</button></a>
-                </div>
-            </div>
-            <div class="concert-card">
-                <img src="../static/img/concert10.jpg" alt="">
-                <div class="concert-info">
-                    <h3>Melody of the Moon</h3>
-                    <p>Lose yourself in the enchanting rhythms of Melody of the Moon, where the night sky and music merge in perfect harmony.</p>
-                    <a href="ticket.html"><button>Buy Tickets</button></a>
-                </div>
-            </div>
+        <div id="concert-list">
+            <!-- Concert cards will be injected here dynamically -->
         </div>
         
         <div style="height: 10%"></div> <!-- footer -->
     </main>
+
+    <script src="../static/config.js"></script>
+    <script>
+        async function fetchConcerts() {
+            try {
+                const response = await fetch(`${BACKEND_URL}/concerts/`, {
+                    method: "GET",
+                    headers: { "Content-Type": "application/json" },
+                });
+
+                if (response.ok) {
+                    const concerts = await response.json();
+
+                    const concertListDiv = document.getElementById("concert-list");
+                    concertListDiv.innerHTML = ""; // Clear any existing content
+
+                    concerts.forEach((concert) => {
+                        const concertCard = document.createElement("div");
+                        concertCard.className = "concert-card";
+
+                        // Format date and time
+                        const formattedDate = new Date(concert.cdate_time).toLocaleString();
+
+                        concertCard.innerHTML = `
+                            <img src="../static/img/concert${concert.cid}.jpg" alt="Concert Image"{}
+                            <div class="concert-info">
+                                <div class="concert-txt">
+                                    <h3 class="h3">${concert.cname}</h3>
+                                    <p>Event Date & Time: ${formattedDate}</p>
+                                    <a href="ticket.html?cid=${concert.cid}">
+                                        <button>Buy Tickets</button>
+                                    </a>
+                                </div>
+                            </div>
+                        `;
+
+                        concertListDiv.appendChild(concertCard);
+                    });
+                } else {
+                    const errorData = await response.json();
+                    alert(errorData.error || "Failed to fetch concerts!");
+                }
+            } catch (error) {
+                console.error("Error fetching concerts:", error);
+                alert("An error occurred while loading concerts. Please try again.");
+            }
+        }
+
+        // Fetch concerts when the page loads
+        document.addEventListener("DOMContentLoaded", fetchConcerts);
+    </script>
 </body>
 </html>

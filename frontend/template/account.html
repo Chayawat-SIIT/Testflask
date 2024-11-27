@@ -29,15 +29,15 @@
                 <form id="accountForm" method="post">
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" id="username" name="username" value="Punnachai" readonly>
+                        <p>Username: <span id="username"></span></p>
                     </div>
                     <div class="form-group">
                         <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" value="punnachai@mail.com" readonly>
+                        <p>Email: <span id="email"></span></p>
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" value="0812345678" readonly>
+                        <p>Phone Number: <span id="phone"></span></p>
                     </div>
                     <div class="form-group">
                         <label for="userType">User Type</label>
@@ -72,3 +72,23 @@
     </main>
 </body>
 </html>
+
+<script>
+    window.onload = function() {
+      // Retrieve user data from localStorage
+      const uid = localStorage.getItem("uid");
+      const username = localStorage.getItem("username");
+      const email = localStorage.getItem("email");
+      const phone_num = localStorage.getItem("phone_num");
+  
+      // Check if the user is logged in
+      if (!uid || !username || !email || !phone_num) {
+        window.location.href = "login.html"; // Redirect to login if not logged in
+      } else {
+        // Display the user details
+        document.getElementById("username").innerText = username;
+        document.getElementById("email").innerText = email;
+        document.getElementById("phone").innerText = phone_num;
+      }
+    };
+  </script>

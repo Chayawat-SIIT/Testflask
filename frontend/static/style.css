@@ -63,7 +63,7 @@ h1 {
   font-weight: 700;
   color: #000;
   text-align: center;
-  padding-top: 3rem;
+  padding-top: 1rem;
 }
 
 /* Main Content with Background Image */
@@ -152,6 +152,17 @@ main button:hover {
   overflow: hidden;
 }
 
+.concert-txt {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0%;
+  margin-left: 4%;
+}
+
+.concert-txt h3{
+  margin-bottom: 0.5rem;
+}
+
 .concert-card img {
   width: 20%;
   object-fit: cover;
@@ -230,7 +241,7 @@ main button:hover {
   font-size: 14px;
 }
 
-#username, #email, #phone, #password, #eventname, #eventdate, #eventdesc, #eventimage {
+#full_name, #username, #email, #phone, #password, #eventname, #eventdate, #eventdesc, #eventimage, #phone_num {
   height: 40px;
   padding: 10px;
   margin-bottom: 5px;
