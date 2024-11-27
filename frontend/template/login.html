@@ -77,7 +77,8 @@
               }
             } else {
               const errorData = await response.json();
-              alert(errorData.error || "Login failed!");
+              // alert(errorData.error || "Login failed!");
+              alert("Incorrect Username or Password\nPlease try again")
             }
           } catch (error) {
             console.error("Error during login:", error);
