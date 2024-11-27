@@ -36,7 +36,7 @@ You can run the application locally or access the deployed cloud version.
 ### Access the Cloud Deployment
 
 The application is deployed on AWS. You can access it using the following URL:  
-**[Cloud Application URL](http://backend-alb-83162907.us-east-1.elb.amazonaws.com)**
+**[Cloud Application URL](http://frontend-alb-1852434033.us-east-1.elb.amazonaws.com/)**
 
 ---
 
