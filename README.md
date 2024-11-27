@@ -18,7 +18,7 @@ Welcome to the **G-10 Cloud-Based Application Project** repository! This reposit
 │   ├── requirements.txt # Python dependencies
 │   └── ...            # Other backend scripts and modules
 └── README.md          # Project documentation
-
+```
 ---
 
 ## Features
