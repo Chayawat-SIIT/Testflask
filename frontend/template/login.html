@@ -68,7 +68,13 @@
               localStorage.setItem("phone_num", data.phone_num);
     
               // Redirect to the account page
-              window.location.href = "account.html";
+              const user_type = localStorage.getItem('user_type');
+              if (user_type === 'organizer') {
+                window.location.href = "org_account.html"
+              }
+              else {
+                window.location.href = "account.html";
+              }
             } else {
               const errorData = await response.json();
               alert(errorData.error || "Login failed!");

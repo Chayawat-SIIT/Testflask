@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Event | Concert Ticketing System</title>
+    <title>Update Event | Concert Ticketing System</title>
     <link rel="shortcut icon" type="image/x-icon" href="../static/img/logo.png">
     <link rel="stylesheet" href="../static/style.css">
 </head>
@@ -26,22 +26,22 @@
                 <form id="accountForm" method="post">
                     <div class="form-group">
                         <label for="eventname">Event Name</label>
-                        <input type="text" id="eventname" name="eventname">
+                        <input type="text" id="eventname" name="eventname"> <!-- fetch these data from DB -->
                     </div>
                     <div class="form-group">
                         <label for="eventdate">Date</label>
-                        <input type="date" id="eventdate" name="eventdate">
+                        <input type="date" id="eventdate" name="eventdate"> <!-- fetch these data from DB -->
                     </div>
                     <div class="form-group">
                         <label for="eventdesc   ">Event Description</label>
-                        <input type="text" id="eventdesc" name="eventdesc">
+                        <input type="text" id="eventdesc" name="eventdesc"> <!-- fetch these data from DB -->
                     </div>
                     <div class="form-group">
-                        <label for="eventimage">Upload Advertisement Image</label>
+                        <label for="eventimage">Upload New Image</label>
                         <input type="file" id="eventimage" name="eventimage">
                     </div>
                 </form>
-                <button>Create Event</button>
+                <button>Update Event</button>
             </section>
         </div>
     </main>

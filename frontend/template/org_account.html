@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Event | Concert Ticketing System</title>
+    <title>Account | Concert Ticketing System</title>
     <link rel="shortcut icon" type="image/x-icon" href="../static/img/logo.png">
     <link rel="stylesheet" href="../static/style.css">
 </head>
@@ -20,28 +20,44 @@
     </header>
 
     <main>
-        <div class="concert-card" style="height: 540px; width: 800px; margin-top: 140px;">            
-            <section class="user-details">
-                <h2>Event Details</h2>
+        <h1>My Account</h1>
+        <div class="concert-card" style="height: 470px;">
+            <section class="user-details" style="margin-top: -120px;">
+                <h2>Account Details</h2>
                 <form id="accountForm" method="post">
                     <div class="form-group">
-                        <label for="eventname">Event Name</label>
-                        <input type="text" id="eventname" name="eventname">
+                        <label for="username">Username</label>
+                        <p>Username: <span id="username"></span></p>
                     </div>
                     <div class="form-group">
-                        <label for="eventdate">Date</label>
-                        <input type="date" id="eventdate" name="eventdate">
+                        <label for="email">Email Address</label>
+                        <p>Email: <span id="email"></span></p>
                     </div>
                     <div class="form-group">
-                        <label for="eventdesc   ">Event Description</label>
-                        <input type="text" id="eventdesc" name="eventdesc">
-                    </div>
-                    <div class="form-group">
-                        <label for="eventimage">Upload Advertisement Image</label>
-                        <input type="file" id="eventimage" name="eventimage">
+                        <label for="phone">Phone Number</label>
+                        <p>Phone Number: <span id="phone"></span></p>
                     </div>
                 </form>
-                <button>Create Event</button>
+            </section>
+
+            <section class="user-tickets">
+                <h2>Your Events</h2>
+                <div class="concert-card" style="height: 240px;">
+                    <img src="../static/img/concert03.jpg" alt="">
+                    <div class="concert-info">
+                        <h3>Rock Fest 2024</h3>
+                        <p>Electrifying performances by top rock bands, with a mix of classic anthems and fresh new sounds</p>
+                        <button>View Event</button>
+                    </div>
+                </div>
+                <div class="concert-card" style="height: 240px;">
+                    <img src="../static/img/concert01.jpg" alt="">
+                    <div class="concert-info">                    
+                        <h3>Indie Vibes 2025</h3>
+                        <p>Enjoy an eclectic mix of indie rock, folk, and electronic tunes from up-and-coming artists.</p>
+                        <button>View Event</button>
+                    </div>
+                </div>
             </section>
         </div>
     </main>

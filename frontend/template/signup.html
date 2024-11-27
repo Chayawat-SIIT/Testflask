@@ -81,6 +81,7 @@
         function setUserType() {
             const checkbox = document.getElementById('org-checkbox');
             const user_type = checkbox.checked ? 'organizer' : 'normal';
+            localStorage.setItem('user_type', user_type);   // to forward to LogIn
         }
 
 
