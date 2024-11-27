@@ -7,7 +7,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../static/img/log.png">
     <link rel="stylesheet" href="../static/style.css">
     <style>
-
+        /* Add any custom styles needed here */
     </style>
 </head>
 <body style="overflow: hidden;">
@@ -63,30 +63,28 @@
             </div>
         </div>
     </main>
-
+    <script src="../static/config.js"></script>
     <script>
-        const zoneData = {      // THIS WILL CHANGE WHEN CONNECTING TO DB
-            zoneA: { price: 200, ticketsLeft: 1 },
-            zoneB: { price: 200, ticketsLeft: 40 },
-            zoneC: { price: 150, ticketsLeft: 60 },
-            zoneD: { price: 150, ticketsLeft: 70 }
-        };
-    
-        const zoneElements = {
-            zoneA: document.getElementById("zoneA"),
-            zoneB: document.getElementById("zoneB"),
-            zoneC: document.getElementById("zoneC"),
-            zoneD: document.getElementById("zoneD")
-        };
-    
-        const zoneSelect = document.getElementById("zone-select");
-        const amountSelect = document.getElementById("amount-select");
-        const priceDisplay = document.getElementById("price");
-        const amountDisplay = document.getElementById("amount");
-        const totalDisplay = document.getElementById("total");
-        const purchaseButton = document.getElementById("purchase-btn");
-    
-        function updateZoneColors() {
+        // Function to fetch zone data from the backend API
+        async function fetchZoneData() {
+            try {
+                const response = await fetch(`${BACKEND_URL}/ticket/${zoneElements}`); // Replace with your backend API endpoint
+                const data = await response.json();
+                return data; // Expected data structure: { zoneA: { price, ticketsLeft }, ... }
+            } catch (error) {
+                console.error("Error fetching zone data:", error);
+            }
+        }
+
+        // Function to update the colors based on tickets left
+        function updateZoneColors(zoneData) {
+            const zoneElements = {
+                ZoneA: document.getElementById("zoneA"),
+                ZoneB: document.getElementById("zoneB"),
+                ZoneC: document.getElementById("zoneC"),
+                ZoneD: document.getElementById("zoneD")
+            };
+
             for (const [zone, data] of Object.entries(zoneData)) {
                 const element = zoneElements[zone];
                 if (data.ticketsLeft > 50) {
@@ -98,38 +96,63 @@
                 }
             }
         }
-    
-        function updateSummary() {
+
+        // Function to update the summary section
+        function updateSummary(zoneData) {
+            const zoneSelect = document.getElementById("zone-select");
+            const amountSelect = document.getElementById("amount-select");
+            const priceDisplay = document.getElementById("price");
+            const amountDisplay = document.getElementById("amount");
+            const totalDisplay = document.getElementById("total");
+            const purchaseButton = document.getElementById("purchase-btn");
+
             const selectedZone = zoneSelect.value;
             const ticketAmount = parseInt(amountSelect.value, 10);
             const ticketPrice = zoneData[selectedZone].price;
-    
+
             priceDisplay.textContent = ticketPrice;
             amountDisplay.textContent = ticketAmount;
             totalDisplay.textContent = ticketPrice * ticketAmount;
-    
+
             purchaseButton.disabled = ticketAmount > zoneData[selectedZone].ticketsLeft;
         }
-    
-        function purchaseTickets() {
+
+        // Function to handle ticket purchase
+        async function purchaseTickets(zoneData) {
+            const zoneSelect = document.getElementById("zone-select");
+            const amountSelect = document.getElementById("amount-select");
             const selectedZone = zoneSelect.value;
             const ticketAmount = parseInt(amountSelect.value, 10);
-    
+
             if (ticketAmount <= zoneData[selectedZone].ticketsLeft) {
                 zoneData[selectedZone].ticketsLeft -= ticketAmount;
-                updateZoneColors();
-                updateSummary();
+                updateZoneColors(zoneData);
+                updateSummary(zoneData);
+
+                // Proceed to payment page
                 window.location.href = "payment.html";
             } else {
                 alert("Not enough tickets available!");
             }
         }
-    
-        zoneSelect.addEventListener("change", updateSummary);
-        amountSelect.addEventListener("change", updateSummary);
-        purchaseButton.addEventListener("click", purchaseTickets);
-    
-        updateZoneColors();
-        updateSummary();
+
+        // Event listeners for dropdown changes and purchase button click
+        document.getElementById("zone-select").addEventListener("change", () => fetchAndUpdateData());
+        document.getElementById("amount-select").addEventListener("change", () => fetchAndUpdateData());
+        document.getElementById("purchase-btn").addEventListener("click", () => purchaseTickets(window.zoneData));
+
+        // Function to fetch data and update the page
+        async function fetchAndUpdateData() {
+            const zoneData = await fetchZoneData(); // Fetch the latest data
+            if (zoneData) {
+                window.zoneData = zoneData; // Save data to a global variable
+                updateZoneColors(zoneData); // Update the zone colors
+                updateSummary(zoneData); // Update the summary section
+            }
+        }
+
+        // Initial data load when the page is loaded
+        fetchAndUpdateData();
     </script>
 </body>
+</html>
